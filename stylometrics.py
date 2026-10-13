@@ -1,3 +1,9 @@
+import re
+def clean_text(text):
+    text = text.replace('ي','ی').replace('ك','ک')
+    text = re.sub(r'_+', '', text)
+    text = re.sub(r'[\u064B-\u065F', '', text)
+    return text
 def analyze_text(text):
     """
     تحلیل آماری و سبک‌شناختی متن و شعر فارسی
@@ -10,7 +16,7 @@ def analyze_text(text):
     """
     if not text.strip():
         return 0, 0, 0, 0, 0
-
+    text = clean_text(text)
     lines = text.strip().split('\n')
     words = text.split()
     
